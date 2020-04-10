@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<!-- _   _              _____ _
+	| | | | ___ _   _  |_   _| |__   ___ _ __ ___
+	| |_| |/ _ \ | | |   | | | '_ \ / _ \ '__/ _ \
+	|  _  |  __/ |_| |   | | | | | |  __/ | |  __/
+	|_| |_|\___|\__, |   |_| |_| |_|\___|_|  \___|
+	            |___/
+ 	If your looking at this you might be interested in my code.
+	If you have questions shoot me an email at jaye.cornell@gmail.com -->
+	<head>
+		<meta charset="utf-8">
+		<title>Jaye's Portfolio</title>
+
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+	<body>
+		<div this-is-a-test="testing?" class="pageHeader fullWidth">
+			<div class="title">
+				<h1>TITLE.COM</h1>
+			</div>
+			<div w3-include-html="mainNav.html"></div>
+		</div>
+		<div class="pageContent fullWidth">
+
+		</div>
+		<div class="pageFooter fullWidth">
+
+		</div>
+
+		<script>
+			function includeHTML() {
+				var z, i, elmnt, file, xhttp;
+				/* Loop through a collection of all HTML elements: */
+				z = document.getElementsByTagName("*");
+				for (i = 0; i < z.length; i++) {
+					elmnt = z[i];
+					/*search for elements with a certain atrribute:*/
+					file = elmnt.getAttribute("w3-include-html");
+					if (file) {
+						/* Make an HTTP request using the attribute value as the file name: */
+						xhttp = new XMLHttpRequest();
+						xhttp.onreadystatechange = function() {
+							if (this.readyState == 4) {
+								if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+								if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+								/* Remove the attribute, and call this function once more: */
+								elmnt.removeAttribute("w3-include-html");
+								includeHTML();
+							}
+						}
+						xhttp.open("GET", file, true);
+						xhttp.send();
+						/* Exit the function: */
+						return;
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
